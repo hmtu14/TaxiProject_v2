@@ -1,5 +1,5 @@
 #pragma once
-#include "init.h"
+#include <ctime>
 #include "Coord.h"
 
 class Guess

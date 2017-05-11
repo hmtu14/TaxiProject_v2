@@ -1,6 +1,6 @@
 #pragma once
 #include "Coord.h"
-#include "init.h"
+#include <ctime>
 class Taxi
 {
 private:

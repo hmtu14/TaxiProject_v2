@@ -17,9 +17,7 @@ double Sqr(double x)
 
 double Coord::Distance(Coord nCoord)
 {
-	v1 = Sqr(lat - nCoord.lat)
-	v2 = Sqr(lng - nCoord.lng)
-	return sqrt(v1 + v2); 
+	return 0;
 }
 
 Coord::~Coord()
