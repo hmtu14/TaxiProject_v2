@@ -1,16 +1,16 @@
 #include "Taxi.h"
 
 
+Taxi::Taxi()
+{
+}
 
-Taxi::Taxi(int id__, Coord mCoord__)
+Taxi::Taxi(int id__, Coord mCoord__, bool free__, datetime time__)
 {
 	id = id__;
 	m_Coord = mCoord__;
-}
-
-
-Taxi::Taxi()
-{
+	free = free__;
+	m_time = time__;
 }
 
 Taxi::~Taxi()
