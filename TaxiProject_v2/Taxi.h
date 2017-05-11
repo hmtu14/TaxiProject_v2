@@ -11,6 +11,9 @@ private:
 public:
 	Taxi();
 	Taxi(int id__, Coord mCoord__, bool free__, time_t time__);
+
+	//getter setter
+	Coord getCoord();
 	~Taxi();
 };
 
