@@ -12,7 +12,9 @@ Coord::Coord()
 
 double Coord::Distance(Coord nCoord)
 {
-	return 0.0;
+	v1 = (lat - nCoord.lat) ** 2
+	v2 = (lng - nCoord.lng) ** 2
+	return math.sqrt(v1 + v2); 
 }
 
 Coord::~Coord()
