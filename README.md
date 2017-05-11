@@ -1,6 +1,7 @@
 # TaxiProject_v2
 
 #pull ve lam
+#Quen, clone ve chu dung pull ve
 #lam xong thi push len:
   git add .
   git commit
