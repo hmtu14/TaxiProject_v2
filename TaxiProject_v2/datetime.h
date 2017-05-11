@@ -2,9 +2,8 @@
 
 class DateTime
 {
-private:
-	int second, minute, hour, day, month, year; 
 public:
+	int second, minute, hour, day, month, year;
 	DateTime(int, int, int, int, int, int);
 	int getCumMinute(); 
 	~DateTime();
