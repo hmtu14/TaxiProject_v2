@@ -18,7 +18,7 @@ private:
 	};
 public:
 	Trajectory();
-	vector<vector<int>> toVec(datetime t, int timestamp); //ham tra ve matrix bieu do bat khach trong ngay tu 0h -> t, timestamp tinh = phut
+	vector<vector<int>> toVec(time_t t, int timestamp); //ham tra ve matrix bieu do bat khach trong ngay tu 0h -> t, timestamp tinh = phut
 	~Trajectory();
 };
 
