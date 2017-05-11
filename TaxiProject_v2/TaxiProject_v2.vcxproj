@@ -149,6 +149,7 @@
     <ClCompile Include="RoadSegment.cpp" />
     <ClCompile Include="Route.cpp" />
     <ClCompile Include="Taxi.cpp" />
+    <ClCompile Include="Trajectory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Coord.h" />
@@ -158,6 +159,7 @@
     <ClInclude Include="RoadSegment.h" />
     <ClInclude Include="Route.h" />
     <ClInclude Include="Taxi.h" />
+    <ClInclude Include="Trajectory.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
