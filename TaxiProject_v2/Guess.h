@@ -1,6 +1,8 @@
 #pragma once
 #include "datetime.h"
 #include "Coord.h"
+#include <vector>
+using namespace std;
 
 class Guess
 {
@@ -8,8 +10,7 @@ private:
 	int type; // 0 = khach vay, 1 = khach tong dai
 	DateTime s_time;
 	DateTime e_time;
-	Coord s_coord;
-	Coord t_coord;
+	vector<Coord> lstCoord;
 
 public:
 	Guess();
