@@ -15,6 +15,10 @@ int DateTime::getCumMinute()
 	return second / 60 + hour * 60 + minute;
 }
 
+DateTime::DateTime()
+{
+}
+
 DateTime::~DateTime()
 {
 

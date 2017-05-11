@@ -20,7 +20,7 @@ private:
 	};
 public:
 	Trajectory();
-	vector<vector<int>> toVec(time_t t, int timestamp, Coord top, Coord btm); //ham tra ve matrix bieu do bat khach trong ngay tu 0h -> t, timestamp tinh = phut
+	vector<vector<int>> toVec(DateTime t, int timestamp, Coord top, Coord btm); //ham tra ve matrix bieu do bat khach trong ngay tu 0h -> t, timestamp tinh = phut
 	~Trajectory();
 };
 
