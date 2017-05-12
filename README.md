@@ -14,3 +14,5 @@ aaa
 # Tuan anh:
 - Viet lai ham cooord distance
 - viet ParkingPlace::inParking()
+# Tu:
+- Viet lai dung pointer cho toan bo vector

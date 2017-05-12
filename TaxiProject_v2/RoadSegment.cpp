@@ -20,7 +20,7 @@ void RoadSegment::countTaxi(DateTime t, vector<Trajectory> lstTracjectory, int &
 	oCount = 0;
 	for (auto Tracjec : lstTracjectory) {
 		for (auto Taxi : Tracjec.getlstTaxi()) {
-			if (Taxi.getTime().getCumMinute() > t.getCumMinute() + TTHRESHOLD) return;
+			if (Taxi.getTime().getCumMinute() > t.getCumMinute() + TTHRESHOLD) break;
 			if (Taxi.getTime().getCumMinute() < t.getCumMinute() + TTHRESHOLD) continue;
 			if (Taxi.getRoadID() == id) {
 				allCount++;
