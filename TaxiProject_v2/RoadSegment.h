@@ -1,5 +1,7 @@
 #pragma once
 #include "Coord.h"
+#include "datetime.h"
+#include "Trajectory.h"
 
 class RoadSegment
 {
@@ -10,6 +12,8 @@ private:
 public:
 	RoadSegment();
 	RoadSegment(int id__, Coord sCoord__, Coord eCoord__);
+
+	void countTaxi(DateTime t, vector<Trajectory> lstTracjectory, int& allCount, int& oCount);
 	~RoadSegment();
 };
 

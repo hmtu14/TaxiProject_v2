@@ -39,6 +39,11 @@ vector<Trajectory> Trajectory::findSimilar(DateTime t, int timestamp, Coord top,
 	return vector<Trajectory>();
 }
 
+vector<Taxi> Trajectory::getlstTaxi()
+{
+	return lstTaxi;
+}
+
 Trajectory::~Trajectory()
 {
 }
