@@ -9,6 +9,8 @@
 
 Viet tiep o class thi pull ve viet xong push len
 Viet lai 1 so attribute gi do thi tao branch truoc, viet check loi xong roi commit len t merge voi master hay. Dung viet thang len master
+aaa
 
 #Tuan anh:
-- Viet tiep class datetime: viet tat ca nhung ham m thay can dung
+- Viet lai ham cooord distance
+- viet ParkingPlace::inParking()
