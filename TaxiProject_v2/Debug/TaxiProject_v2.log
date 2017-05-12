@@ -1,0 +1,11 @@
+﻿  datetime.cpp
+  Trajectory.cpp
+e:\apcs\taxi\taxiproject_v2\taxiproject_v2\trajectory.cpp(14): warning C4552: '+': operator has no effect; expected operator with side-effect
+e:\apcs\taxi\taxiproject_v2\taxiproject_v2\trajectory.cpp(16): warning C4244: 'argument': conversion from 'double' to 'unsigned int', possible loss of data
+  Taxi.cpp
+  Generating Code...
+  Compiling...
+  Guess.cpp
+  Generating Code...
+  TaxiProject_v2.vcxproj -> E:\APCS\Taxi\TaxiProject_v2\Debug\TaxiProject_v2.exe
+  TaxiProject_v2.vcxproj -> E:\APCS\Taxi\TaxiProject_v2\Debug\TaxiProject_v2.pdb (Full PDB)

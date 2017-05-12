@@ -7,10 +7,13 @@ private:
 	int id;
 	Coord m_Coord;
 	bool free; // free = true khong co khach, false = co khach
-	datetime m_time;
+	DateTime m_time;
 public:
 	Taxi();
-	Taxi(int id__, Coord mCoord__, bool free__, datetime time__);
+	Taxi(int id__, Coord mCoord__, bool free__, DateTime time__);
+
+	//getter setter
+	Coord getCoord();
 	~Taxi();
 };
 

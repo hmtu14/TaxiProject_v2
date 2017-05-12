@@ -1,8 +1,11 @@
 #pragma once
-class datetime
+
+class DateTime
 {
 public:
-	datetime();
-	~datetime();
-};
-
+	int second, minute, hour, day, month, year;
+	DateTime(int, int, int, int, int, int);
+	int getCumMinute();
+	DateTime();
+	~DateTime();
+};	

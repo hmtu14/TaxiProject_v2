@@ -1,10 +1,9 @@
 #pragma once
 class Coord {
-private:
+	
+public:
 	double lat;
 	double lng;
-public:
-
 	Coord();
 	Coord(double lat__, double lng__);
 	//Tinh khoang cach
