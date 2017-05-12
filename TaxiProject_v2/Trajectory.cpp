@@ -19,6 +19,8 @@ vector<vector<int>> Trajectory::toVec(DateTime t, int timestamp, Coord top, Coor
 	return vector<vector<int>>();
 }
 
+
+//d(A, B) = SUM(ABS(A[i][j] - B[i][j]) 
 double Trajectory::vecDistance(DateTime t, int timestamp, Coord top, Coord btm, Trajectory nTracjec)
 {
 	double res = 0;
@@ -35,8 +37,8 @@ double Trajectory::vecDistance(DateTime t, int timestamp, Coord top, Coord btm, 
 vector<Trajectory> Trajectory::findSimilar(DateTime t, int timestamp, Coord top, Coord btm, vector<Trajectory> lstTracjectory)
 {
 	vector<Trajectory> res = lstTracjectory;
-	//sort(res.begin(),res.end(),)
-	return vector<Trajectory>();
+	sort(res.begin(), res.end(), cmpTrajectory(*this, t, timestamp, top, btm)); 
+	return res;
 }
 
 Trajectory::~Trajectory()
