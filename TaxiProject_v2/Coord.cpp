@@ -5,12 +5,10 @@
 #define earthRadiusKm 6371.0
 #define M_PI 3.14159265358979323846
 
-// This function converts decimal degrees to radians
 double deg2rad(double deg) {
 	return (deg * M_PI / 180);
 }
 
-//  This function converts radians to decimal degrees
 double rad2deg(double rad) {
 	return (rad * 180 / M_PI);
 }
