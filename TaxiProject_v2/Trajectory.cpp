@@ -32,9 +32,10 @@ double Trajectory::vecDistance(DateTime t, int timestamp, Coord top, Coord btm, 
 	return res;
 }
 
-vector<Trajectory> Trajectory::findSimilar(vector<Trajectory> lstTracjectory)
+vector<Trajectory> Trajectory::findSimilar(DateTime t, int timestamp, Coord top, Coord btm, vector<Trajectory> lstTracjectory)
 {
-
+	vector<Trajectory> res = lstTracjectory;
+	//sort(res.begin(),res.end(),)
 	return vector<Trajectory>();
 }
 
