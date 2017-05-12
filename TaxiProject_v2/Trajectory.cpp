@@ -19,6 +19,25 @@ vector<vector<int>> Trajectory::toVec(DateTime t, int timestamp, Coord top, Coor
 	return vector<vector<int>>();
 }
 
+double Trajectory::vecDistance(DateTime t, int timestamp, Coord top, Coord btm, Trajectory nTracjec)
+{
+	double res = 0;
+	vector<vector<int>> mVec = this->toVec(t, timestamp, top, btm);
+	vector<vector<int>> nVec = nTracjec.toVec(t, timestamp, top, btm);
+	for (int i = 0; i < mVec.size(); i++) {
+		for (int j = 0; j < mVec[0].size(); j++) {
+			res += sqrt(abs(mVec[i][j] - nVec[i][j]));
+		}
+	}
+	return res;
+}
+
+vector<Trajectory> Trajectory::findSimilar(vector<Trajectory> lstTracjectory)
+{
+
+	return vector<Trajectory>();
+}
+
 Trajectory::~Trajectory()
 {
 }
