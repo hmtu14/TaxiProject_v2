@@ -10,17 +10,12 @@ Coord::Coord()
 {
 }
 
-double Sqr(double x)
-{
-	return x * x; 
-}
+
 
 
 double Coord::Distance(Coord nCoord)
 {
-	double v1 = Sqr(lat - nCoord.lng); 
-	double v2 = Sqr(lng - nCoord.lat);
-	return sqrt(v1 + v2); 
+	return 0;
 }
 
 Coord::~Coord()

@@ -1,5 +1,6 @@
 #include "RoadSegment.h"
 
+const int TTHRESHOLD = 15;
 
 
 RoadSegment::RoadSegment()
@@ -15,9 +16,15 @@ RoadSegment::RoadSegment(int id__, Coord sCoord__, Coord eCoord__)
 
 void RoadSegment::countTaxi(DateTime t, vector<Trajectory> lstTracjectory, int & allCount, int & oCount)
 {
+	allCount = 0;
+	oCount = 0;
 	for (auto Tracjec : lstTracjectory) {
 		for (auto Taxi : Tracjec.getlstTaxi()) {
-
+			if (Taxi.getTime().getCumMinute() > t.getCumMinute() + TTHRESHOLD) return;
+			if (Taxi.getTime().getCumMinute() < t.getCumMinute() + TTHRESHOLD) continue;
+			if (Taxi.getRoadID() == id) {
+				allCount++;
+			}
 		}
 	}
 }
