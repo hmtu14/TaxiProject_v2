@@ -10,6 +10,7 @@ private:
 public:
 	Route();
 	Route(vector<RoadSegment> lstRoad__, ParkingPlace desParking__);
+	double calProb(DateTime t); //Duy viet
 	~Route();
 };
 

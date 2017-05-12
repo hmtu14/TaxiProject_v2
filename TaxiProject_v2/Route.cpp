@@ -12,6 +12,11 @@ Route::Route(vector<RoadSegment> lstRoad__, ParkingPlace desParking__)
 	desParking = desParking__;
 }
 
+double Route::calProb(DateTime t)
+{
+	return 0.0;
+}
+
 
 Route::~Route()
 {
