@@ -12,4 +12,5 @@ Viet lai 1 so attribute gi do thi tao branch truoc, viet check loi xong roi comm
 aaa
 
 #Tuan anh:
-- Viet tiep class datetime: viet tat ca nhung ham m thay can dung
+- Viet lai ham cooord distance
+- viet ParkingPlace::inParking()
