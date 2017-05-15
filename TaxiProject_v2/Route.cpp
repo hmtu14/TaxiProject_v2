@@ -6,7 +6,7 @@ Route::Route()
 {
 }
 
-Route::Route(vector<RoadSegment> lstRoad__, ParkingPlace desParking__)
+Route::Route(vector<RoadSegment*> &lstRoad__, ParkingPlace* &desParking__)
 {
 	lstRoad = lstRoad__;
 	desParking = desParking__;
@@ -20,4 +20,9 @@ double Route::calProb(DateTime t)
 
 Route::~Route()
 {
+	for (int i = 0; i < lstRoad.size(); ++i) {
+		delete lstRoad[i];
+	}
+	lstRoad.clear();
+	delete desParking;
 }

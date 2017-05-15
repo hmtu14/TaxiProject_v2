@@ -6,7 +6,7 @@ Taxi::Taxi()
 }
 
 
-Taxi::Taxi(int id__, Coord mCoord__, bool free__, DateTime time__, int roadID__)
+Taxi::Taxi(int id__,Coord &mCoord__, bool free__,DateTime &time__, int roadID__)
 {
 	id = id__;
 	m_Coord = mCoord__;

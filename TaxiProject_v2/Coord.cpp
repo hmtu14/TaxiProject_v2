@@ -36,11 +36,12 @@ Coord::Coord()
 
 
 
-double Coord::Distance(Coord nCoord)
+double Coord::Distance(const Coord &nCoord)
 {
 	return distanceEarth(this->lat, this->lng, nCoord.lat, nCoord.lng); 
 }
 
 Coord::~Coord()
 {
+
 }

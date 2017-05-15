@@ -11,9 +11,9 @@ private:
 	int id;
 public:
 	RoadSegment();
-	RoadSegment(int id__, Coord sCoord__, Coord eCoord__);
+	RoadSegment(int id__, Coord &sCoord__, Coord &eCoord__);
 
-	void countTaxi(DateTime t, vector<Trajectory> lstTracjectory, int& allCount, int& oCount);
+	void countTaxi(DateTime t,const vector<Trajectory> &lstTracjectory, int& allCount, int& oCount);
 	~RoadSegment();
 };
 

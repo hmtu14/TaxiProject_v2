@@ -6,7 +6,7 @@ Trajectory::Trajectory()
 {
 }
 
-vector<vector<int>> Trajectory::toVec(DateTime t, int timestamp, Coord top, Coord btm)
+vector<vector<int>> Trajectory::toVec(DateTime t, int timestamp, Coord &top, Coord &btm)
 {
 	vector<vector<int>> res;
 	double lat_thres = (btm.lat - top.lat) / gSize;
@@ -15,13 +15,13 @@ vector<vector<int>> Trajectory::toVec(DateTime t, int timestamp, Coord top, Coor
 		for (auto taxi : lstTaxi) {
 			res[i][taxi.getCoord().lng / lng_thres*gSize + taxi.getCoord().lat / lat_thres]++;
 		}
-	}	
-	return vector<vector<int>>();
+	}
+	return res;
 }
 
 
 //d(A, B) = SUM(ABS(A[i][j] - B[i][j]) 
-double Trajectory::vecDistance(DateTime t, int timestamp, Coord top, Coord btm, Trajectory nTracjec)
+double Trajectory::vecDistance(DateTime t, int timestamp, Coord top, Coord btm,Trajectory &nTracjec)
 {
 	double res = 0;
 	vector<vector<int>> mVec = this->toVec(t, timestamp, top, btm);
@@ -34,16 +34,16 @@ double Trajectory::vecDistance(DateTime t, int timestamp, Coord top, Coord btm, 
 	return res;
 }
 
-vector<Trajectory> Trajectory::findSimilar(DateTime t, int timestamp, Coord top, Coord btm, vector<Trajectory> lstTracjectory)
+vector<Trajectory> Trajectory::findSimilar(DateTime t, int timestamp, Coord top, Coord btm,const vector<Trajectory> &lstTracjectory)
 {
 	vector<Trajectory> res = lstTracjectory;
 	sort(res.begin(), res.end(), cmpTrajectory(*this, t, timestamp, top, btm)); 
 	return res;
 }
 
-vector<Taxi> Trajectory::getlstTaxi()
+vector<Taxi>* Trajectory::getlstTaxi()
 {
-	return lstTaxi;
+	return &lstTaxi;
 }
 
 Trajectory::~Trajectory()

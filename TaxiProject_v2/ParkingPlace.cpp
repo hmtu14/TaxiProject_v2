@@ -1,8 +1,7 @@
 #include "ParkingPlace.h"
 
 
-ParkingPlace::ParkingPlace(vector<Coord> lstCoord__) {
-	lstCoord = lstCoord__;
+ParkingPlace::ParkingPlace(vector<Coord> &lstCoord__) {
 	double xmin = lstCoord__[0].lat;
 	double ymin = lstCoord__[0].lng;
 	double xmax = lstCoord__[0].lat;
@@ -62,16 +61,16 @@ Coord BottomRightCoord(vector<Coord> S)
 
 bool ParkingPlace::inParking(Coord x)
 {
-	if (x.lat < this->topleft.lat || x.lng < this->topleft.lng)
-		return false; 
-	if (x.lat > this->btmright.lat || x.lng > this->btmright.lng)
-		return false;
-	Coord TopLeft = TopLeftCoord(this->lstCoord);
-	Coord BottomRight = BottomRightCoord(this->lstCoord); 
-	if (x.lat < TopLeft.lat || x.lng < TopLeft.lng)
-		return false;
-	if (x.lat > BottomRight.lat || x.lng > BottomRight.lng)
-		return false;
+	//if (x.lat < this->topleft.lat || x.lng < this->topleft.lng)
+	//	return false; 
+	//if (x.lat > this->btmright.lat || x.lng > this->btmright.lng)
+	//	return false;
+	//Coord TopLeft = TopLeftCoord(this->lstCoord);
+	//Coord BottomRight = BottomRightCoord(this->lstCoord); 
+	//if (x.lat < TopLeft.lat || x.lng < TopLeft.lng)
+	//	return false;
+	//if (x.lat > BottomRight.lat || x.lng > BottomRight.lng)
+	//	return false;
 	return true; 
 }
 
