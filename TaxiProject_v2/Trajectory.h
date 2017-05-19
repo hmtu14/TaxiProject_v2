@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
-#include "Taxi.h"
+#include "GPS.h"
+#include "datetime.h"
 #include <algorithm>
 #include <string>
 
@@ -10,8 +11,8 @@ using namespace std;
 class Trajectory
 {
 	friend class cmpTrajectory; 
-private:
-	vector<Taxi> lstTaxi;
+public:
+	vector<GPS> lstGPS;
 	enum day
 	{
 		Mo,
@@ -34,7 +35,7 @@ public:
 	vector<Trajectory> findSimilar(DateTime t, int timestamp, Coord top, Coord btm,const vector<Trajectory> &lstTracjectory);
 
 	//getter
-	vector<Taxi>* getlstTaxi();
+	vector<GPS> getlstTaxi();
 	~Trajectory();
 };
 

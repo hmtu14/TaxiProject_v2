@@ -9,11 +9,11 @@ Trajectory::Trajectory()
 vector<vector<int>> Trajectory::toVec(DateTime t, int timestamp, Coord &top, Coord &btm)
 {
 	vector<vector<int>> res;
-	double lat_thres = (btm.lat - top.lat) / gSize;
-	double lng_thres = (btm.lng - top.lng) / gSize;
+	double lat_thres = (btm.Latitude - top.Latitude) / gSize;
+	double lng_thres = (btm.Longitude - top.Longitude) / gSize;
 	for (int i = 0; i < t.getCumMinute(); i + timestamp) {
-		for (auto taxi : lstTaxi) {
-			res[i][taxi.getCoord().lng / lng_thres*gSize + taxi.getCoord().lat / lat_thres]++;
+		for (auto gps : lstGPS) {
+			res[i][gps.coord.Longitude / lng_thres*gSize + gps.coord.Latitude / lat_thres]++;
 		}
 	}
 	return res;
@@ -41,9 +41,9 @@ vector<Trajectory> Trajectory::findSimilar(DateTime t, int timestamp, Coord top,
 	return res;
 }
 
-vector<Taxi>* Trajectory::getlstTaxi()
+vector<GPS> Trajectory::getlstTaxi()
 {
-	return &lstTaxi;
+	return lstGPS;
 }
 
 Trajectory::~Trajectory()
