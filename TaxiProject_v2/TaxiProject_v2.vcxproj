@@ -142,6 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Graph.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ParkingPlace.cpp" />
     <ClCompile Include="Trajectory.cpp" />
@@ -149,6 +150,7 @@
   <ItemGroup>
     <ClInclude Include="Coord.h" />
     <ClInclude Include="datetime.h" />
+    <ClInclude Include="Graph.h" />
     <ClInclude Include="ParkingPlace.h" />
     <ClInclude Include="GPS.h" />
     <ClInclude Include="Trajectory.h" />
