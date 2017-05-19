@@ -5,11 +5,11 @@
 class Route
 {
 private:
-	vector<RoadSegment> lstRoad;
-	ParkingPlace desParking;
+	vector<RoadSegment*> lstRoad;
+	ParkingPlace *desParking;
 public:
 	Route();
-	Route(vector<RoadSegment> lstRoad__, ParkingPlace desParking__);
+	Route(vector<RoadSegment*> &lstRoad__, ParkingPlace* &desParking__);
 	double calProb(DateTime t); //Duy viet
 	~Route();
 };

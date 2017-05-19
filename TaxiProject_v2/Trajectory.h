@@ -4,7 +4,7 @@
 #include <algorithm>
 #include <string>
 
-const int gSize = 100; //Chia grid ra thanh gSizexgSize
+const int gSize = 100; //Chia grid ra thanh gSize x gSize
 using namespace std;
 
 class Trajectory
@@ -22,14 +22,19 @@ private:
 		Sa,
 		Su
 	};
+
+
 public:
 	Trajectory();
-	vector<vector<int>> toVec(DateTime t, int timestamp, Coord top, Coord btm); //ham tra ve matrix bieu do bat khach trong ngay tu 0h -> t, timestamp tinh = phut
-	double vecDistance(DateTime t, int timestamp, Coord	top, Coord btm ,Trajectory nTracjec);
-	vector<Trajectory> findSimilar(DateTime t, int timestamp, Coord top, Coord btm,vector<Trajectory> lstTracjectory);
+
+	vector<vector<int>> toVec(DateTime t, int timestamp, Coord &top, Coord &btm); //ham tra ve matrix bieu do bat khach trong ngay tu 0h -> t, timestamp tinh = phut
+	double vecDistance(DateTime t, int timestamp, Coord	top, Coord btm ,Trajectory &nTracjec); // check vi sao them const o day k duoc
+
+	//ham findSimilar can viet lai
+	vector<Trajectory> findSimilar(DateTime t, int timestamp, Coord top, Coord btm,const vector<Trajectory> &lstTracjectory);
 
 	//getter
-	vector<Taxi> getlstTaxi();
+	vector<Taxi>* getlstTaxi();
 	~Trajectory();
 };
 
