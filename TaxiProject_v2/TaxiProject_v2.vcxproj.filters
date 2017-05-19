@@ -15,25 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Taxi.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Coord.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="ParkingPlace.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="RoadSegment.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Route.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Guess.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="datetime.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Trajectory.cpp">
@@ -44,28 +26,19 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Taxi.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Coord.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="ParkingPlace.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="RoadSegment.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Route.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Guess.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="datetime.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Trajectory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GPS.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

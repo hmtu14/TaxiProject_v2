@@ -142,24 +142,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Coord.cpp" />
-    <ClCompile Include="datetime.cpp" />
-    <ClCompile Include="Guess.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="ParkingPlace.cpp" />
-    <ClCompile Include="RoadSegment.cpp" />
-    <ClCompile Include="Route.cpp" />
-    <ClCompile Include="Taxi.cpp" />
     <ClCompile Include="Trajectory.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Coord.h" />
     <ClInclude Include="datetime.h" />
-    <ClInclude Include="Guess.h" />
     <ClInclude Include="ParkingPlace.h" />
-    <ClInclude Include="RoadSegment.h" />
-    <ClInclude Include="Route.h" />
-    <ClInclude Include="Taxi.h" />
+    <ClInclude Include="GPS.h" />
     <ClInclude Include="Trajectory.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
