@@ -3,18 +3,22 @@ struct DateTime
 {
 	int second, minute, hour, day, month, year;
 	DateTime() {};
-	DateTime(int second_, int minute_, int hour_) : second(second_), minute(minute_), hour(hour_), day(-1), month(-1), year(-1) {};
+	DateTime(int second_, int minute_, int hour_) : second(second_), minute(minute_), hour(hour_), day(0), month(0), year(0) {};
 	DateTime(int second_, int minute_, int hour_, int day_, int month_, int year_):second(second_), minute(minute_), hour(hour_), day(day_), month(month_), year(year_) {};
+	DateTime(int second_) :second(second_), minute(0), hour(0), day(0) {};
 	int getCumMinute()
 	{
 		return second / 60 + hour * 60 + minute;
+	}
+	int getSecond() {
+		return 3600 * hour + 60 * minute + second;
 	}
 
 	DateTime operator+(DateTime time) 
 	{
 		DateTime res;
 		res.day = day; res.month = month; res.year = year;
-		res.second = (second + time.second)% 60;
+		res.second = (second + time.second) % 60;
 		int r_second = (second + time.second) / 60;
 		res.minute = (minute + time.minute + r_second) % 60;
 		int r_min = (minute + time.minute + r_second) / 60;
@@ -31,7 +35,7 @@ struct DateTime
 		return (second == time.second && minute == time.minute && hour == time.hour);
 	}
 
-	bool operator>(DateTime time) {
+	bool operator>(DateTime time) const{
 		if (hour > time.hour) 
 			return true;
 		if (minute > time.minute)
