@@ -213,12 +213,12 @@ double Graph::probabilityOnRoute(Status* status)
 	int countCO = 0;
 	for (int i = 0; i < m_Trajectory.size(); ++i) {
 		vector<GPS> lstGPS = m_Trajectory[i].lstGPS; // Each Trajectory
-		int begin = (status->startTime.getSecond() - DELTA_TIME) / TAU_TIME;
-		int end = (status->endTime.getSecond() - DELTA_TIME) / TAU_TIME;
-		for (; begin <= end; ++begin) { //Each Interval
+		int kBegin = (status->startTime.getSecond() - DELTA_TIME) / TAU_TIME;
+		int kEnd = (status->endTime.getSecond() - DELTA_TIME) / TAU_TIME;
+		for (; kBegin <= kEnd; ++kBegin) { //Each Interval
 			//Interval
-			DateTime s = (begin - 1)*TAU_TIME; 
-			DateTime t = begin*TAU_TIME;
+			DateTime s = (kBegin - 1)*TAU_TIME; 
+			DateTime t = kBegin*TAU_TIME;
 			//Binary Search
 			vector<GPS>::iterator low = std::lower_bound(lstGPS.begin(), lstGPS.end(), s, CompareTimeGPS());
 			vector<GPS>::iterator up = std::upper_bound(lstGPS.begin(), lstGPS.end(), t, CompareTimeGPS());
@@ -243,7 +243,16 @@ double Graph::probabilityOnRoute(Status* status)
 	return (double)countC / countCO;
 }
 
+int Graph::findCenterParkingPlace(ParkingPlace parking)
+{
+	///
+}
+
 double Graph::probabilityOnParking(ParkingPlace parking, DateTime currentTime)
 {
+	DateTime ta = currentTime;
+	DateTime tb = currentTime + DateTime(WAIT_TIME_PARKINGPLACE);
+
+
 	return 1;
 }

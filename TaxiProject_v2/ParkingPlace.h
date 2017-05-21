@@ -18,6 +18,7 @@ public:
 	//friend Coord BottomRightCoord(vector<Coord>);
 	//friend Coord TopLeftCoord(vector<Coord>);
 
+
 	~ParkingPlace();
 };
 

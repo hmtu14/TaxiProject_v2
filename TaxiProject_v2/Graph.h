@@ -16,12 +16,13 @@ using namespace std;
 #define DELTA_TIME 15*60
 #define TAU_TIME DELTA_TIME/3
 
+
 struct Node
 {
 	int nodeID;
 	Coord coord;
 	Node() {};
-	Node(int id, double Latitude, double Longitude) 
+	Node(int id, double Latitude, double Longitude)
 	{
 		nodeID = id;
 		coord.Latitude = Latitude;
@@ -80,5 +81,7 @@ public:
 	void traversalTreeCalculate(Status* root,ParkingPlace parking, vector<double>& Probs, vector<Status*>& Path);
 	double probabilityOnRoute(Status* status);
 	double probabilityOnParking(ParkingPlace parking, DateTime currentTime);
+	int findCenterParkingPlace(ParkingPlace parking);
+
 
 };
