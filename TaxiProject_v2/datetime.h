@@ -6,6 +6,14 @@ struct DateTime
 	DateTime(int second_, int minute_, int hour_) : second(second_), minute(minute_), hour(hour_), day(0), month(0), year(0) {};
 	DateTime(int second_, int minute_, int hour_, int day_, int month_, int year_):second(second_), minute(minute_), hour(hour_), day(day_), month(month_), year(year_) {};
 	DateTime(int second_) :second(second_), minute(0), hour(0), day(0) {};
+	DateTime(string date) {
+		year = stoi(date.substr(0, 4));
+		month = stoi(date.substr(5, 2));
+		day = stoi(date.substr(8, 2));
+		hour = stoi(date.substr(11, 2));
+		minute = stoi(date.substr(14, 2));
+		second = stoi(date.substr(17, 2));
+	}
 	int getCumMinute()
 	{
 		return second / 60 + hour * 60 + minute;
