@@ -78,14 +78,10 @@ double Graph::calculateProbability(vector<int> edgeList, ParkingPlace parking, D
 	int layer = 0;
 	buildStatusTree(root,Route, layer,currentTime);
 	traversalTree(root);
-	vector<double> Probs;
-	vector<Status*> Path;
-	m_CurPr = 1;
-	traversalTreeCalculate(root, parking, Probs, Path);
-	double Pr = 0;
-	for (int i = 0; i < Probs.size(); ++i) {
-		Pr += Probs[i];
-	}
+	traversalTreeCalculate(root, parking);
+	m_PrS = 1 - m_PrS; //Xác suất bắt được khách khi thực hiện hành động S
+	double Pr = m_PrS;
+	m_PrS = 0;
 	return Pr;
 }
 
@@ -130,30 +126,29 @@ void Graph::initTrajectory()
 
 /*
 	Duyệt cây để tính xác suất, parking place được xem như đỉnh cuối của cạnh cuối cùng
+	Xác suất bắt được khách : PrS = 1 - xác suất không bắt được khách ở parking * xác suất không bắt được khách trên Route
+	Xác suất không bắt được khách trên roote chính là tổng xác suất không bắt được khách ở mỗi Path trên Status tree
+		
 */
-void Graph::traversalTreeCalculate(Status* root, ParkingPlace parking, vector<double>& Probs, vector<Status*>& Path)
+
+void Graph::traversalTreeCalculate(Status*& root, ParkingPlace parking)
 {
 
-	if (root == NULL)
+	if (root->pLeft == NULL && root->pRight == NULL)
 	{
-		// On Route
-		for (int i = 0; i < Path.size(); ++i) {
-		m_CurPr *= probabilityOnRoute(Path[i]);
-		}
-		// On Parking Place
-		m_CurPr *= probabilityOnParking(parking, root->pParent->endTime);
-		Probs.push_back(m_CurPr);
+		root->Pr = root->pParent->Pr * probabilityOnRoute(root);
+		m_PrS += (1 - root->Pr) * (1 -  probabilityOnParking(parking, root->endTime));  //Xác suất không bắt được khách khi thực hiện hành động S với một trường hợp 
 		return;
 	}
 	else
 	{
-		Path.push_back(root);
-		traversalTreeCalculate(root->pLeft, parking, Probs, Path);
-		Path.pop_back();
-
-		Path.push_back(root);
-		traversalTreeCalculate(root->pRight,parking, Probs, Path);
-		Path.pop_back();
+		if (root->pParent == NULL)
+			root->Pr = 1;
+		else {
+			root->Pr = root->pParent->Pr * probabilityOnRoute(root);
+		}
+		traversalTreeCalculate(root->pLeft, parking);
+		traversalTreeCalculate(root->pRight,parking);
 	}
 }
 
@@ -198,6 +193,7 @@ void Graph::buildStatusTree(Status*& root,vector<Edge*> Route,  int layer, DateT
 		root->endTime = currentTime;
 		root->edgeID = -1;
 		root->decisionPrev = 0;
+		root->pParent = NULL;
 	}
 	if (layer == Route.size()) {
 		Status* leftNode = new Status;
@@ -245,6 +241,7 @@ struct CompareTimeGPS
 
 double Graph::probabilityOnRoute(Status* status)
 {
+	return 1;
 	Edge* edge = m_EdgeList[status->edgeID];
 	int countC = 0;
 	int countCO = 0;

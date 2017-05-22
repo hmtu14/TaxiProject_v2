@@ -56,6 +56,7 @@ struct Status {
 	Status* pLeft;
 	Status* pRight;
 	Status* pParent;
+	double Pr;
 };
 
 
@@ -68,7 +69,7 @@ private:
 	Status* root;
 	vector<Trajectory> m_Trajectory;
 private:
-	double m_CurPr;
+	double m_PrS;
 public:
 	Graph() {};
 	Graph(string nodefile, string edgefile);
@@ -79,7 +80,7 @@ public:
 	void addEdge(int ide, Node*& u,Node*& v);
 	void buildStatusTree(Status*& root,vector<Edge*> Route, int layer, DateTime currentTime);
 	void traversalTree(Status*& root);
-	void traversalTreeCalculate(Status* root,ParkingPlace parking, vector<double>& Probs, vector<Status*>& Path);
+	void traversalTreeCalculate(Status*& root,ParkingPlace parking);
 	double probabilityOnRoute(Status* status);
 	double probabilityOnParking(ParkingPlace parking, DateTime currentTime);
 	int findCenterParkingPlace(ParkingPlace parking);
