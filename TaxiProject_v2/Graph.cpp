@@ -99,7 +99,7 @@ void Graph::initTrajectory()
 			string lng;
 			string edgeID;
 			string tmp;
-			while ( file.good())
+			while (file.good())
 			{
 				getline(file, id, ',');
 				getline(file, status, ',');
@@ -136,7 +136,7 @@ void Graph::traversalTreeCalculate(Status*& root, ParkingPlace parking)
 
 	if (root->pLeft == NULL && root->pRight == NULL)
 	{
-		root->Pr = root->pParent->Pr * probabilityOnRoute(root);
+		root->Pr = root->pParent->Pr * probabilityOnRoute(root); // Xác xuất bắt được khách trên mỗi route
 		m_PrS += (1 - root->Pr) * (1 -  probabilityOnParking(parking, root->endTime));  //Xác suất không bắt được khách khi thực hiện hành động S với một trường hợp 
 		return;
 	}
@@ -241,14 +241,13 @@ struct CompareTimeGPS
 
 double Graph::probabilityOnRoute(Status* status)
 {
-	return 1;
 	Edge* edge = m_EdgeList[status->edgeID];
 	int countC = 0;
 	int countCO = 0;
 	for (int i = 0; i < m_Trajectory.size(); ++i) {
 		vector<GPS> lstGPS = m_Trajectory[i].lstGPS; // Each Trajectory
 		int kBegin = (status->startTime.getSecond() - DELTA_TIME) / TAU_TIME;
-		int kEnd = (status->endTime.getSecond() - DELTA_TIME) / TAU_TIME;
+		int kEnd = (status->endTime.getSecond() + DELTA_TIME) / TAU_TIME;
 		for (; kBegin <= kEnd; ++kBegin) { //Each Interval
 			//Interval
 			DateTime s = (kBegin - 1)*TAU_TIME; 
@@ -257,7 +256,7 @@ double Graph::probabilityOnRoute(Status* status)
 			vector<GPS>::iterator low = std::lower_bound(lstGPS.begin(), lstGPS.end(), s, CompareTimeGPS());
 			vector<GPS>::iterator up = std::upper_bound(lstGPS.begin(), lstGPS.end(), t, CompareTimeGPS());
 			int l = low - lstGPS.begin();
-			int u = up - lstGPS.end();
+			int u = up - lstGPS.begin();
 			//Count in range [l, u]
 			for (; l <= u; ++u) {
 				if (lstGPS[l].edgeID == edge->edgeID) {
@@ -324,7 +323,7 @@ double Graph::probabilityOnParking(ParkingPlace parking, DateTime currentTime)
 				}
 			}
 		}
-}
+	}
 
 	return 1;
 }

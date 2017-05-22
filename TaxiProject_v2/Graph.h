@@ -11,10 +11,10 @@
 #include "Coord.h"
 #include "ParkingPlace.h"
 using namespace std;
-#define WAIT_TIME_PARKINGPLACE 10*60
-#define CROSS_TIME_ROADSEGMENT 4*60
-#define DELTA_TIME 15*60
-#define TAU_TIME DELTA_TIME/3
+#define WAIT_TIME_PARKINGPLACE (10*60)
+#define CROSS_TIME_ROADSEGMENT (4*60)
+#define DELTA_TIME (15*60)
+#define TAU_TIME (DELTA_TIME/3)
 
 
 struct Node

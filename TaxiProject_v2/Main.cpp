@@ -9,11 +9,15 @@ using namespace std;
 
 int main() {
 	Graph G(".\\data_graph\\nodes.csv", ".\\data_graph\\edges.csv");
-	/*vector<int> edge;
+	G.initTrajectory();
+	vector<int> edge;
 	edge.push_back(1);
 	edge.push_back(3);
 	edge.push_back(5);
 	ParkingPlace p;
-	G.calculateProbability(edge, p, DateTime(0, 30, 12));*/
-	G.initTrajectory();
+	G.calculateProbability(edge, p, DateTime(0, 30, 12));
+	
+
+
+
 }
