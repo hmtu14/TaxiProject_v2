@@ -73,6 +73,7 @@ public:
 	Graph() {};
 	Graph(string nodefile, string edgefile);
 	double calculateProbability(vector<int> Route,ParkingPlace parking, DateTime currentTime);
+	void initTrajectory();
 
 public:
 	void addEdge(int ide, Node*& u,Node*& v);

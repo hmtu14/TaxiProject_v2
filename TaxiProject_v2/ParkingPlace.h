@@ -7,7 +7,7 @@ using namespace std;
 
 class ParkingPlace
 {
-private:
+public:
 	Coord topleft;
 	Coord btmright;
 public:

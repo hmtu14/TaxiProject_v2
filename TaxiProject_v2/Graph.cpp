@@ -89,6 +89,43 @@ double Graph::calculateProbability(vector<int> edgeList, ParkingPlace parking, D
 	return Pr;
 }
 
+void Graph::initTrajectory()
+{
+	for (int tt = 20151019; tt < 20151020; tt++) {
+		for (int t = 37; t < 337; t++) {
+			Trajectory curTrajectory;
+			string filename = ".\\data_trajectory\\" + to_string(tt) + "\\" + to_string(t) + ".csv";
+			ifstream file(filename);
+			string id;
+			string status;
+			string date;
+			string lat;
+			string lng;
+			string edgeID;
+			string tmp;
+			while ( file.good())
+			{
+				getline(file, id, ',');
+				getline(file, status, ',');
+				getline(file, date, ',');
+				getline(file, lat, ',');
+				getline(file, lng, ',');
+				getline(file, edgeID, ',');
+				getline(file, tmp, ',');
+				getline(file, tmp, ',');
+				getline(file, tmp, ',');
+				getline(file, tmp);
+				bool free = true;
+				if (id == "") break;
+				if (status == "1") free = false;
+				GPS cur = GPS(stoi(id), Coord(stod(lat), stod(lng)), free, DateTime(), stoi(edgeID));
+				curTrajectory.lstGPS.push_back(cur);
+			}
+			m_Trajectory.push_back(curTrajectory);
+		}
+	}
+}
+
 
 
 /*
@@ -245,14 +282,53 @@ double Graph::probabilityOnRoute(Status* status)
 
 int Graph::findCenterParkingPlace(ParkingPlace parking)
 {
-	///
+	Coord center = Coord((parking.topleft.Latitude + parking.btmright.Latitude) / 2, (parking.topleft.Longitude + parking.btmright.Longitude) / 2);
+	double minDis = 10000;
+	int res = 0;
+	for (auto point : m_NodeList) {
+		if (center.Distance(point->coord) < minDis) {
+			res = point->nodeID;
+			minDis = center.Distance(point->coord);
+		}
+	}
+	return res;
 }
 
 double Graph::probabilityOnParking(ParkingPlace parking, DateTime currentTime)
 {
 	DateTime ta = currentTime;
 	DateTime tb = currentTime + DateTime(WAIT_TIME_PARKINGPLACE);
-
+	int countPO = 0;
+	int countPC = 0;
+	for (int i = 0; i < m_Trajectory.size(); ++i) {
+		vector<GPS> lstGPS = m_Trajectory[i].lstGPS; // Each Trajectory
+		int kBegin = (ta.getSecond() - DELTA_TIME) / TAU_TIME;
+		int kEnd = (tb.getSecond() - DELTA_TIME) / TAU_TIME;
+		for (; kBegin <= kEnd; ++kBegin) { //Each Interval
+											//Interval
+			DateTime s = (kBegin - 1)*TAU_TIME;
+			DateTime t = kBegin*TAU_TIME;
+			//Binary Search
+			vector<GPS>::iterator low = std::lower_bound(lstGPS.begin(), lstGPS.end(), s, CompareTimeGPS());
+			vector<GPS>::iterator up = std::upper_bound(lstGPS.begin(), lstGPS.end(), t, CompareTimeGPS());
+			int l = low - lstGPS.begin();
+			int u = up - lstGPS.end();
+			//Count in range [l, u]
+			for (; l <= u; ++u) {
+				if (/*trong parking place*/true) {
+					int flag = true;
+					if (flag && lstGPS[l].free) {
+						flag = false;
+						//countC++;
+					}
+					if (!flag && !lstGPS[l].free) {
+						//countCO++;
+						break;
+					}
+				}
+			}
+		}
+}
 
 	return 1;
 }

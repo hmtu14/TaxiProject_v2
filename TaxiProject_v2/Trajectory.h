@@ -35,7 +35,6 @@ public:
 	vector<Trajectory> findSimilar(DateTime t, int timestamp, Coord top, Coord btm,const vector<Trajectory> &lstTracjectory);
 
 	//getter
-	vector<GPS> getlstTaxi();
 	~Trajectory();
 };
 
