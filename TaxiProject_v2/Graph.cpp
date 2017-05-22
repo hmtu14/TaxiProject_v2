@@ -221,7 +221,7 @@ void Graph::buildStatusTree(Status*& root,vector<Edge*> Route,  int layer, DateT
 	layer = layer - 1;
 }
 
-
+/*
 struct CompareTimeGPS
 {
 	bool operator()(const GPS& element, DateTime time) {
@@ -240,7 +240,7 @@ struct CompareTimeGPS
 
 };
 //Binary Search
-/*
+
 vector<GPS>::iterator low = std::lower_bound(lstGPS.begin(), lstGPS.end(), s, CompareTimeGPS());
 vector<GPS>::iterator up = std::lower_bound(lstGPS.begin(), lstGPS.end(), t, CompareTimeGPS());
 int l = low - lstGPS.begin();
@@ -299,52 +299,57 @@ double Graph::probabilityOnRoute(Status* status)
 int Graph::findCenterParkingPlace(ParkingPlace parking)
 {
 	Coord center = Coord((parking.topleft.Latitude + parking.btmright.Latitude) / 2, (parking.topleft.Longitude + parking.btmright.Longitude) / 2);
-	double minDis = 10000;
+	double minDis = INFINITY;
 	int res = 0;
 	for (auto point : m_NodeList) {
-		if (center.Distance(point->coord) < minDis) {
+		double d = center.Distance(point->coord);
+		if (d < minDis) {
 			res = point->nodeID;
-			minDis = center.Distance(point->coord);
+			minDis = d;
 		}
 	}
 	return res;
 }
 
-double Graph::probabilityOnParking(ParkingPlace parking, DateTime currentTime)
-{
-	return 1;
-	DateTime ta = currentTime;
-	DateTime tb = currentTime + DateTime(WAIT_TIME_PARKINGPLACE);
-	int countPO = 0;
-	int countPC = 0;
-	for (int i = 0; i < m_Trajectory.size(); ++i) {
-		vector<GPS> lstGPS = m_Trajectory[i].lstGPS; // Each Trajectory
-		int kBegin = (ta.getSecond() - DELTA_TIME) / TAU_TIME;
-		int kEnd = (tb.getSecond() - DELTA_TIME) / TAU_TIME;
-		for (; kBegin <= kEnd; ++kBegin) { //Each Interval
-			DateTime s = (kBegin - 1)*TAU_TIME;
-			DateTime t = kBegin*TAU_TIME;
-			//Binary Search
-			vector<GPS>::iterator low = std::lower_bound(lstGPS.begin(), lstGPS.end(), s, CompareTimeGPS());
-			vector<GPS>::iterator up = std::upper_bound(lstGPS.begin(), lstGPS.end(), t, CompareTimeGPS());
-			int l = low - lstGPS.begin();
-			int u = up - lstGPS.end();
-			//Count in range [l, u]
-			for (; l <= u; ++u) {
-				if (/*trong parking place*/true) {
-					int flag = true;
-					if (flag && lstGPS[l].free) {
-						flag = false;
-						//countC++;
-					}
-					if (!flag && !lstGPS[l].free) {
-						//countCO++;
-						break;
-					}
-				}
-			}
+int Graph::findNearestNode(Coord currentPos) {
+	int res = 0;
+	int min = INFINITY;
+	for (int i = 0; i < m_NodeList.size(); ++i) {
+		double d = currentPos.Distance(Coord(m_NodeList[i]->coord));
+		if (d < min) {
+			min = d;
+			res = i;
 		}
 	}
+	return res;
+}
 
+struct CompareFindParking
+{
+	bool operator()(const pair<int, double>& x, const pair<int, double>& y)
+	{
+		return x.second > y.second;
+	}
+};
+
+vector<int> Graph::findParkingForRecommender(Coord currentPos, int k) {
+	vector<pair<int, double>> vec;
+	for (int i = 0; i < m_Parking.size(); ++i) {
+		Coord center((m_Parking[i].topleft.Latitude + m_Parking[i].btmright.Latitude) / 2, (m_Parking[i].topleft.Longitude + m_Parking[i].btmright.Longitude) / 2);
+		vec.push_back(make_pair(i, center.Distance(currentPos)));
+	}
+	sort(vec.begin(), vec.end(), CompareFindParking());
+	vector<int> res;
+	for (int i = 0; i < k; ++i)
+	{
+		int node = findCenterParkingPlace(m_Parking[vec[i].first]);
+		res.push_back(node);
+	}
+	return res;
+}
+
+
+double Graph::probabilityOnParking(ParkingPlace parking, DateTime currentTime)
+{
 	return 1;
 }
