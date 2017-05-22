@@ -8,6 +8,8 @@ using namespace std;
 
 
 int main() {
+
+int main() {
 	Graph G(".\\data_graph\\nodes.csv", ".\\data_graph\\edges.csv");
 	vector<int> edge;
 	edge.push_back(1);
