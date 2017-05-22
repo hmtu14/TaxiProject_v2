@@ -302,7 +302,6 @@ double Graph::probabilityOnParking(ParkingPlace parking, DateTime currentTime)
 		int kBegin = (ta.getSecond() - DELTA_TIME) / TAU_TIME;
 		int kEnd = (tb.getSecond() - DELTA_TIME) / TAU_TIME;
 		for (; kBegin <= kEnd; ++kBegin) { //Each Interval
-											//Interval
 			DateTime s = (kBegin - 1)*TAU_TIME;
 			DateTime t = kBegin*TAU_TIME;
 			//Binary Search
