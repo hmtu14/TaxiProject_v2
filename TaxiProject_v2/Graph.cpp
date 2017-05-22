@@ -114,7 +114,7 @@ void Graph::initTrajectory()
 				bool free = true;
 				if (id == "") break;
 				if (status == "1") free = false;
-				GPS cur = GPS(stoi(id), Coord(stod(lat), stod(lng)), free, DateTime(), stoi(edgeID));
+				GPS cur = GPS(stoi(id), Coord(stod(lat), stod(lng)), free, DateTime(date), stoi(edgeID));
 				curTrajectory.lstGPS.push_back(cur);
 			}
 			m_Trajectory.push_back(curTrajectory);
