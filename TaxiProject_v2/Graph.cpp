@@ -78,14 +78,9 @@ double Graph::calculateProbability(vector<int> edgeList, ParkingPlace parking, D
 	int layer = 0;
 	buildStatusTree(root,Route, layer,currentTime);
 	traversalTree(root);
-	vector<double> Probs;
-	vector<Status*> Path;
-	m_CurPr = 1;
-	traversalTreeCalculate(root, parking, Probs, Path);
-	double Pr = 0;
-	for (int i = 0; i < Probs.size(); ++i) {
-		Pr += Probs[i];
-	}
+	traversalTreeCalculate(root, parking);
+	double Pr = m_Pr;
+	m_Pr = 0;
 	return Pr;
 }
 
@@ -94,29 +89,24 @@ double Graph::calculateProbability(vector<int> edgeList, ParkingPlace parking, D
 /*
 	Duyệt cây để tính xác suất, parking place được xem như đỉnh cuối của cạnh cuối cùng
 */
-void Graph::traversalTreeCalculate(Status* root, ParkingPlace parking, vector<double>& Probs, vector<Status*>& Path)
+void Graph::traversalTreeCalculate(Status*& root, ParkingPlace parking)
 {
 
-	if (root == NULL)
+	if (root->pLeft == NULL && root->pRight == NULL)
 	{
-		// On Route
-		for (int i = 0; i < Path.size(); ++i) {
-		m_CurPr *= probabilityOnRoute(Path[i]);
-		}
-		// On Parking Place
-		m_CurPr *= probabilityOnParking(parking, root->pParent->endTime);
-		Probs.push_back(m_CurPr);
+		root->Pr = root->pParent->Pr * probabilityOnRoute(root);
+		m_Pr += root->Pr * probabilityOnParking(parking, root->endTime);
 		return;
 	}
 	else
 	{
-		Path.push_back(root);
-		traversalTreeCalculate(root->pLeft, parking, Probs, Path);
-		Path.pop_back();
-
-		Path.push_back(root);
-		traversalTreeCalculate(root->pRight,parking, Probs, Path);
-		Path.pop_back();
+		if (root->pParent == NULL)
+			root->Pr = 1;
+		else {
+			root->Pr = root->pParent->Pr * probabilityOnRoute(root);
+		}
+		traversalTreeCalculate(root->pLeft, parking);
+		traversalTreeCalculate(root->pRight,parking);
 	}
 }
 
@@ -161,6 +151,7 @@ void Graph::buildStatusTree(Status*& root,vector<Edge*> Route,  int layer, DateT
 		root->endTime = currentTime;
 		root->edgeID = -1;
 		root->decisionPrev = 0;
+		root->pParent = NULL;
 	}
 	if (layer == Route.size()) {
 		Status* leftNode = new Status;
@@ -208,6 +199,7 @@ struct CompareTimeGPS
 
 double Graph::probabilityOnRoute(Status* status)
 {
+	return 1;
 	Edge* edge = m_EdgeList[status->edgeID];
 	int countC = 0;
 	int countCO = 0;
@@ -246,6 +238,7 @@ double Graph::probabilityOnRoute(Status* status)
 int Graph::findCenterParkingPlace(ParkingPlace parking)
 {
 	///
+	return 1;
 }
 
 double Graph::probabilityOnParking(ParkingPlace parking, DateTime currentTime)
