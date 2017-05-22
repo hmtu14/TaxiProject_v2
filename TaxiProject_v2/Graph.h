@@ -69,7 +69,7 @@ private:
 	Status* root;
 	vector<Trajectory> m_Trajectory;
 private:
-	double m_Pr;
+	double m_PrS;
 public:
 	Graph() {};
 	Graph(string nodefile, string edgefile);

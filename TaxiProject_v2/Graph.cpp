@@ -79,8 +79,9 @@ double Graph::calculateProbability(vector<int> edgeList, ParkingPlace parking, D
 	buildStatusTree(root,Route, layer,currentTime);
 	traversalTree(root);
 	traversalTreeCalculate(root, parking);
-	double Pr = m_Pr;
-	m_Pr = 0;
+	m_PrS = 1 - m_PrS; //Xác suất bắt được khách khi thực hiện hành động S
+	double Pr = m_PrS;
+	m_PrS = 0;
 	return Pr;
 }
 
@@ -88,14 +89,18 @@ double Graph::calculateProbability(vector<int> edgeList, ParkingPlace parking, D
 
 /*
 	Duyệt cây để tính xác suất, parking place được xem như đỉnh cuối của cạnh cuối cùng
+	Xác suất bắt được khách : PrS = 1 - xác suất không bắt được khách ở parking * xác suất không bắt được khách trên Route
+	Xác suất không bắt được khách trên roote chính là tổng xác suất không bắt được khách ở mỗi Path trên Status tree
+		
 */
+
 void Graph::traversalTreeCalculate(Status*& root, ParkingPlace parking)
 {
 
 	if (root->pLeft == NULL && root->pRight == NULL)
 	{
 		root->Pr = root->pParent->Pr * probabilityOnRoute(root);
-		m_Pr += root->Pr * probabilityOnParking(parking, root->endTime);
+		m_PrS += (1 - root->Pr) * (1 -  probabilityOnParking(parking, root->endTime));  //Xác suất không bắt được khách khi thực hiện hành động S với một trường hợp 
 		return;
 	}
 	else
