@@ -115,6 +115,7 @@ void Graph::initTrajectory()
 				if (id == "") break;
 				if (status == "1") free = false;
 				GPS cur = GPS(stoi(id), Coord(stod(lat), stod(lng)), free, DateTime(date), stoi(edgeID));
+				cur.currentTime = DateTime(cur.currentTime.getSecond());
 				curTrajectory.lstGPS.push_back(cur);
 			}
 			m_Trajectory.push_back(curTrajectory);
@@ -238,7 +239,13 @@ struct CompareTimeGPS
 	}
 
 };
-
+//Binary Search
+/*
+vector<GPS>::iterator low = std::lower_bound(lstGPS.begin(), lstGPS.end(), s, CompareTimeGPS());
+vector<GPS>::iterator up = std::lower_bound(lstGPS.begin(), lstGPS.end(), t, CompareTimeGPS());
+int l = low - lstGPS.begin();
+int u = up - lstGPS.begin();
+*/
 double Graph::probabilityOnRoute(Status* status)
 {
 	Edge* edge = m_EdgeList[status->edgeID];
@@ -246,19 +253,30 @@ double Graph::probabilityOnRoute(Status* status)
 	int countCO = 0;
 	for (int i = 0; i < m_Trajectory.size(); ++i) {
 		vector<GPS> lstGPS = m_Trajectory[i].lstGPS; // Each Trajectory
+		if (lstGPS.size() == 0)
+			continue;
 		int kBegin = (status->startTime.getSecond() - DELTA_TIME) / TAU_TIME;
 		int kEnd = (status->endTime.getSecond() + DELTA_TIME) / TAU_TIME;
 		for (; kBegin <= kEnd; ++kBegin) { //Each Interval
 			//Interval
 			DateTime s = (kBegin - 1)*TAU_TIME; 
 			DateTime t = kBegin*TAU_TIME;
-			//Binary Search
-			vector<GPS>::iterator low = std::lower_bound(lstGPS.begin(), lstGPS.end(), s, CompareTimeGPS());
-			vector<GPS>::iterator up = std::upper_bound(lstGPS.begin(), lstGPS.end(), t, CompareTimeGPS());
-			int l = low - lstGPS.begin();
-			int u = up - lstGPS.begin();
+
+			int l = 0, u = 0;
+			for (int j = 0; j < lstGPS.size(); ++j) {
+				if (lstGPS[j].currentTime >= s) {
+					l = j;
+					break;
+				}
+			}
+			for (int j = 0; j < lstGPS.size(); ++j) {
+				if (lstGPS[j].currentTime >= t) {
+					u = j;
+					break;
+				}
+			}
 			//Count in range [l, u]
-			for (; l <= u; ++u) {
+			for (; l <= u; ++l) {
 				if (lstGPS[l].edgeID == edge->edgeID) {
 					int flag = true;
 					if (flag && lstGPS[l].free) {
@@ -273,6 +291,8 @@ double Graph::probabilityOnRoute(Status* status)
 			}
 		}
 	}
+	if (countC == 0)
+		return 0;
 	return (double)countC / countCO;
 }
 
@@ -292,6 +312,7 @@ int Graph::findCenterParkingPlace(ParkingPlace parking)
 
 double Graph::probabilityOnParking(ParkingPlace parking, DateTime currentTime)
 {
+	return 1;
 	DateTime ta = currentTime;
 	DateTime tb = currentTime + DateTime(WAIT_TIME_PARKINGPLACE);
 	int countPO = 0;

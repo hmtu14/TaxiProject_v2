@@ -1,4 +1,7 @@
 #pragma once
+#include <string>
+#include <cmath>
+using namespace std;
 struct DateTime
 {
 	int second, minute, hour, day, month, year;
