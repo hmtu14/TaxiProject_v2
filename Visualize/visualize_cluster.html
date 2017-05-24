@@ -50,7 +50,7 @@
 
     var openFile = function(event) {
     var input = event.target;
-    var colorlist = ["#000000", "#0000FF", "#00FFFF", "#006400", ]
+    var colorlist = ["#000000", "#0000FF", "#00FFFF", "#006400","#DC143C", "#006400", "	#FF1493", "#FFD700", "#F08080", "#90EE90", "#800000","	#00FA9A"]
 
     var reader = new FileReader();
     reader.onload = function(){
@@ -74,12 +74,13 @@
         }
         debugger;
         for (var clus in data){
+          color = Math.floor((Math.random() * 12));
           for (var point in data[clus]){
             var tmp = new google.maps.Circle({
-              strokeColor: colorlist[clus],
+              strokeColor: colorlist[color],
               strokeOpacity: 0.8,
               strokeWeight: 10,
-              fillColor: colorlist[clus],
+              fillColor: colorlist[color],
               fillOpacity: 0.75,
               map: map,
               center: data[clus][point],
