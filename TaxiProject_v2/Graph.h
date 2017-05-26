@@ -7,6 +7,7 @@
 #include <sstream>
 #include <cmath>
 #include <stack>
+#include <set>
 #include "Trajectory.h"
 #include "Coord.h"
 #include "ParkingPlace.h"
@@ -15,7 +16,6 @@ using namespace std;
 #define CROSS_TIME_ROADSEGMENT (4*60)
 #define DELTA_TIME (15*60)
 #define TAU_TIME (DELTA_TIME/3)
-
 
 struct Node
 {
@@ -42,8 +42,6 @@ struct Edge
 	Edge(Node* uu, Node* vv) : u(uu), v(vv) {};
 	Edge(Node* uu, Node* vv, double w) : u(uu), v(vv), weight(w) {};
 };
-
-
 
 /*
 Calculate probability
@@ -87,4 +85,5 @@ public:
 	int findCenterParkingPlace(ParkingPlace parking); //Trả về id node trung tâm của parking place
 	vector<int> findParkingForRecommender(Coord currentPos, int k); //Trả về vector id node trung tâm của k parking gần nhất
 	int findNearestNode(Coord currentPos); //Trả về Id của node gần với vị trí hiện tại nhất
+	double findShortestPath(Node *&u, Node*&v); // độ dài đường đi ngắn nhất từ Node u đến Node v 
 };
