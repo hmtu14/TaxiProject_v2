@@ -353,3 +353,52 @@ double Graph::probabilityOnParking(ParkingPlace parking, DateTime currentTime)
 {
 	return 1;
 }
+
+class GreaterDijkstra
+{
+public:
+	bool operator()(const pair<int, double>& x, const pair<int, double>& y)
+	{
+		return x.second > y.second;
+	}
+};
+
+pair<double, vector<int>> Graph::Dijkstra(int s, int t)
+{
+	vector<double> dist(m_NodeList.size() + 5, INFINITY);
+	dist[s] = 0;
+	priority_queue < pair<int, double>, vector<pair<int, double>>, GreaterDijkstra > pq;
+	pq.push(make_pair(s, 0));
+	pair<double, vector<int>> res;
+	vector<int> trace;
+	trace.resize(m_NodeList.size() + 5);
+	while (!pq.empty())
+	{
+		pair<int, double> front = pq.top(); pq.pop();
+		int u = front.first;
+		double d = front.second;
+		if (u == t)
+			res.first = d;
+		if (d > dist[u])
+			continue;
+		for (auto edge : m_AdjList[u]) {
+			int v = edge->v->nodeID;
+			if (dist[u] + edge->weight < dist[v]) {
+				dist[v] = dist[u] + edge->weight;
+				pq.push(make_pair(v, dist[v]));
+				trace[v] = u;
+			}
+		}
+	}
+
+	while (trace[t] != s)
+	{
+		res.second.push_back(t);
+		t = trace[t];
+	}
+	res.second.push_back(s);
+	reverse(res.second.begin(), res.second.end());
+	return res;
+}
+
+

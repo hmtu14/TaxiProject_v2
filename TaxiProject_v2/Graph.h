@@ -7,14 +7,15 @@
 #include <sstream>
 #include <cmath>
 #include <stack>
+#include <queue>
 #include "Trajectory.h"
 #include "Coord.h"
 #include "ParkingPlace.h"
 using namespace std;
 #define WAIT_TIME_PARKINGPLACE (10*60)
 #define CROSS_TIME_ROADSEGMENT (4*60)
-#define DELTA_TIME (15*60)
-#define TAU_TIME (DELTA_TIME/3)
+#define DELTA_TIME (10*60)
+#define TAU_TIME (DELTA_TIME/2)
 
 
 struct Node
@@ -87,4 +88,6 @@ public:
 	int findCenterParkingPlace(ParkingPlace parking); //Trả về id node trung tâm của parking place
 	vector<int> findParkingForRecommender(Coord currentPos, int k); //Trả về vector id node trung tâm của k parking gần nhất
 	int findNearestNode(Coord currentPos); //Trả về Id của node gần với vị trí hiện tại nhất
+	pair<double, vector<int>> Dijkstra(int s, int t);
+	
 };
