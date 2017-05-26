@@ -363,6 +363,7 @@ double Graph::findShortestPath(Node *& u, Node *& v)
 			}
 		}
 	}
+
 	double res = d[v->nodeID]; 
 	delete[]d;
 	return res; 
