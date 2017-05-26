@@ -324,6 +324,50 @@ int Graph::findNearestNode(Coord currentPos) {
 	return res;
 }
 
+typedef pair<double, Node *> SPair; 
+
+double Graph::findShortestPath(Node *& u, Node *& v)
+{
+	const int numNode = m_NodeList.size(); 
+	const int INF = 1E9; 
+	set <SPair> S; 
+	double *d = new double[numNode](); 
+	for (int i = 0; i < m_NodeList.size(); ++i) {
+		Node *cur = m_NodeList[i];
+		int index = cur->nodeID; 
+		if (cur == u)
+			d[index] = 0;
+		else
+			d[index] = INF;
+		S.insert(SPair(d[index], cur)); 
+	}
+
+	while (S.size())
+	{
+		SPair pop = *S.begin(); S.erase(S.begin()); 
+		double value = pop.first; 
+		Node * cur = pop.second; 
+		for (int i = 0; i < m_AdjList[cur->nodeID].size(); i++)
+		{
+			Edge *e = m_AdjList[cur->nodeID][i];
+			Node *adjNode; 
+			if (e->u != cur)
+				adjNode = e->u;
+			else
+				adjNode = e->v; 
+			if (d[adjNode->nodeID] > d[cur->nodeID] + value)
+			{
+				S.erase(S.find(SPair(d[adjNode->nodeID], adjNode))); 
+				d[adjNode->nodeID] = d[cur->nodeID] + value; 
+				S.insert(SPair(d[adjNode->nodeID], adjNode));
+			}
+		}
+	}
+	double res = d[v->nodeID]; 
+	delete[]d;
+	return res; 
+}
+
 struct CompareFindParking
 {
 	bool operator()(const pair<int, double>& x, const pair<int, double>& y)
