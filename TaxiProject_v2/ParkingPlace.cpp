@@ -26,6 +26,7 @@ bool ParkingPlace::inParking(Coord x)
 		return false; 
 	if (x.Latitude > this->btmright.Latitude || x.Longitude > this->btmright.Longitude)
 		return false;
+
 	return true; 
 }
 
